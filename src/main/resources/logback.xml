@@ -1,0 +1,34 @@
+<configuration>
+
+	<!-- Variable para el nombre de salida del fichero, en este caso la fecha -->
+	<timestamp key="logDate" datePattern="dd-MM-yyyy" />
+
+	<appender name="ProyectoLogback"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<!-- Nombre de salida del fichero incluyendo la fecha de la variable -->
+		<file>C://dev//logs//elb1AVS-${logDate}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>C://dev//logs//elb1AVS-${logDate}.%i.log.zip
+			</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>11</maxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<minFileSize>50KB</minFileSize>
+			<maxFileSize>50KB</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%method] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- LOGGER ROOT -->
+	<root level="debug">
+		<appender-ref ref="ProyectoLogback" />
+	</root>
+
+</configuration>
